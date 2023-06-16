@@ -1,24 +1,10 @@
 const express = require('express')
-const {Telegraf, Markup} = require('telegraf');
 
-const bot = new Telegraf('6084139426:AAFPjW6DxwF6HGFZuIqVu0ZeRO-mHCCvEBo');
+const app = express()
+const PORT = 3000
 
-bot.use(async (ctx) => {
-    await ctx.reply(JSON.stringify(ctx.update, null, 2));
-});
+app.get('/', (req, res) => {
+    res.send('Hello debug_Yourself')
+})
 
-bot.on('text', (ctx) => ctx.reply(`Текст "${ctx.update.message.text}" не поддерживается.`))
-
-bot.use(async (ctx) => {
-    await ctx.reply('Что нужно сделать?', Markup
-        .keyboard([
-            ['Добавить студента', 'Показать список студентов', 'Удалить студента'],
-        ]).resize()
-    )
-});
-
-
-bot.launch().then(() => console.log('Started'));
-
-process.once('SIGINT', () => bot.stop('SIGINT'));
-process.once('SIGTERM', () => bot.stop('SIGTERM'));
+app.listen(PORT, () => console.log(`My server is running on port ${PORT}`))
