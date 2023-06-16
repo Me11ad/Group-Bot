@@ -1,13 +1,15 @@
 import express from 'express'
 import { PORT, TOKEN } from './config.js'
 import Telegraf from 'telegraf'
-import { getMainMenu } from '.keyboard.js'
+import { getMainMenu } from './keyboard.js'
 
 const app = express()
 const bot = new Telegraf(TOKEN)
 
 bot.start(ctx => {
-    ctx.reply('Welcome, bro', getMainMenu())
+    ctx.replyWithHTML('Приветствую в <b>GroupBot</b>\n\n'+
+    'Чтобы быстро добавить студента, просто напишите и отправьте боту',
+    getMainMenu())
 })
 
 bot.hears('Добавить студента', ctx => {
@@ -18,7 +20,11 @@ bot.hears('Список студентов', ctx => {
     ctx.reply('Тут будет список студентов')
 })
 bot.on('text', ctx => {
-    ctx.reply('just text')
+    ctx.replyWithHTML(
+        `Вы действительно хотите добавить студента:\n\n`+
+        `<i>${ctx.message.text}</i>`,
+        yesNoKeyboard()
+    )
 })
 
 bot.launch()
