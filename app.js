@@ -28,10 +28,10 @@ bot.hears('Список студентов', async ctx => {
         result = result + `[${i+1}] ${tasks[i]}\n`
     }
 
-    ctx.replyWithHTML{
+    ctx.replyWithHTML (
         '<b>Список студентов:</b>\n\n'+
         `${result}`
-    }
+    )
 })
 
 bot.hears('Удалить студента', ctx => {
