@@ -1,6 +1,6 @@
 import express from 'express'
 import { PORT, TOKEN } from './config.js'
-import Telegraf from 'telegraf'
+import {Telegraf} from 'telegraf'
 import session from 'telegraf/session.js'
 import { getMainMenu, yesNoKeyboard} from './keyboard.js'
 import { getStudents, addStudent, deleteStudent } from './db.js'
